@@ -5,10 +5,11 @@ services:
     environment:
       TOKEN: ${WONTON_SECRET_TOKEN}
       EXTRA: ${WONTON_SECRET_EXTRA}
+      TOKEN2: ${WONTON_SECRET_TOKEN2}
 x-wonton:
   spec: "0.8"
   id: app.secretprobe
-  version: 1.0.1
+  version: 1.0.2
   kind: app
   title: {zh: 密钥探针, en: Secret Probe}
   description: {zh: 填密钥的测试插件, en: Fixture for filling in keys}
@@ -20,6 +21,11 @@ x-wonton:
         title: {zh: 令牌, en: Token}
         description: {zh: 必填的一项, en: Required one}
         url: https://example.com/keys
+        required: true
+    token2:
+      input:
+        title: {zh: 第二个令牌, en: Second token}
+        url: https://example.com/second
         required: true
     extra:
       input:
