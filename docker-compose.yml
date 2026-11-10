@@ -1,18 +1,19 @@
 services:
   web:
     image: busybox:1.36
-    command: ["httpd", "-f", "-p", "8080", "-h", "/tmp"]
+    command: ["sh", "-c", "printf 'TOKEN=[%s] EXTRA=[%s]\\n' \"$$TOKEN\" \"$$EXTRA\" > /tmp/index.html; httpd -f -p 8080 -h /tmp"]
     environment:
       TOKEN: ${WONTON_SECRET_TOKEN}
       EXTRA: ${WONTON_SECRET_EXTRA}
 x-wonton:
   spec: "0.8"
   id: app.secretprobe
-  version: 1.0.0
+  version: 1.0.1
   kind: app
   title: {zh: 密钥探针, en: Secret Probe}
   description: {zh: 填密钥的测试插件, en: Fixture for filling in keys}
   permissions: []
+  webui: {service: web, port: 8080}
   secrets:
     token:
       input:
